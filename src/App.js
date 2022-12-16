@@ -34,6 +34,14 @@ const App = () => {
       setTasksList(newList);
     }
   };
+  const deleteTask = (id) => {
+    const newList = [];
+    for (const task of tasksList) {
+      if (task.id !== id) {
+        newList.push(task);
+      }}
+      setTasksList(newList);
+    };
   console.log(tasksList);
   console.log('App');
   // const taskFunctions = [updateComplete];
@@ -44,7 +52,7 @@ const App = () => {
         <h1>Ada&apos;s Task List</h1>
       </header>
       <main>
-        <div>{<TaskList tasks={TASKS} updateComplete={updateComplete}/>}</div>
+        <div>{<TaskList tasks={tasksList} updateComplete={updateComplete} deleteTask={deleteTask}/>}</div>
       </main>
     </div>
   );

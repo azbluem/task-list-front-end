@@ -6,6 +6,7 @@ import './TaskList.css';
 const TaskList = (props) => {
   // const tasks = props.tasks;
   const updateComplete = props.updateComplete;
+  const deleteTask = props.deleteTask
   console.log('List');
 
     const getTaskListJSX = (tasks) => {
@@ -17,6 +18,7 @@ const TaskList = (props) => {
           title={task.title}
           isComplete={task.isComplete}
           updateComplete={updateComplete}
+          deleteTask = {deleteTask}
         />
       );
     });
@@ -33,7 +35,8 @@ TaskList.propTypes = {
       // 
     })
   ).isRequired,
-  updateComplete: PropTypes.func.isRequired
+  updateComplete: PropTypes.func.isRequired,
+  deleteTask: PropTypes.func.isRequired
 };
 
 export default TaskList;
