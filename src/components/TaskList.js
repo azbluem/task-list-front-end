@@ -6,7 +6,7 @@ import './TaskList.css';
 const TaskList = (props) => {
   // const tasks = props.tasks;
   const updateComplete = props.updateComplete;
-  const deleteTask = props.deleteTask
+  const deleteTask = props.deleteTask;
   console.log('List');
 
     const getTaskListJSX = (tasks) => {

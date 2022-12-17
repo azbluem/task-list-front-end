@@ -44,24 +44,25 @@ const App = () => {
 
   const updateComplete = (id, isComplete) => {
     let mark = isComplete ? 'mark_incomplete' : 'mark_complete';
+    const newList = [];
     axios
       .patch(`${URL}/${id}/${mark}`)
       .then(() => {
-        const newList = [];
         for (const task of tasksList) {
           if (task.id !== id) {
             newList.push(task);
           } else {
             const newTask = {
               ...task,
-              // isComplete: !task.isComplete,
+              isComplete: !task.isComplete,
             };
             newList.push(newTask);
-          }
+          }}}).then(()=>{
+          // console.log(newList);
           setTasksList(newList);
           console.log('task list is updated successfully.');
         }
-      })
+      )
       .catch((error) => {
         console.log(error);
       });
