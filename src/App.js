@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import TaskList from './components/TaskList.js';
+import NewTaskForm from './components/NewTaskForm.js';
 import './App.css';
 import axios from 'axios';
 
@@ -20,7 +21,7 @@ const App = () => {
   const URL = 'http://127.0.0.1:5000/tasks';
   const [tasksList, setTasksList] = useState([]);
 
-  useEffect(() => {
+  const fetchAllTasks = () => {
     axios
       .get(`${URL}`)
       .then((response) => {
@@ -37,7 +38,9 @@ const App = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  };
+
+  useEffect(fetchAllTasks, []);
   // const tasksCopy = TASKS.map((task) => {
   //   return { ...task };
   // });
@@ -67,6 +70,15 @@ const App = () => {
         console.log(error);
       });
   };
+
+  const submitNewTask = (task) => {
+    axios.post(URL,task)
+    .then((response) => {
+      fetchAllTasks();
+    })
+    .catch((error)=>{console.log(error);});
+  };
+
   const deleteTask = (id) => {
     axios
       .delete(`${URL}/${id}`)
@@ -92,6 +104,9 @@ const App = () => {
         <h1>Ada&apos;s Task List</h1>
       </header>
       <main>
+        <div>
+          <NewTaskForm addTaskCallbackFunc={submitNewTask}></NewTaskForm>
+        </div>
         <div>
           {
             <TaskList
